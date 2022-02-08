@@ -15,16 +15,16 @@ pub fn tokenize(text: &str) -> Vec<String> {
         .map(|s| s.to_string()).collect()
 }
 
-pub fn new_pt(tokens: Vec<String>) -> HashMap<String, Vec<u64>> {
-    let mut pt: HashMap<String, Vec<u64>> = HashMap::new();
+pub fn new_pt(tokens: &Vec<String>) -> HashMap<String, Vec<usize>> {
+    let mut pt: HashMap<String, Vec<usize>> = HashMap::new();
     for (i, token) in tokens.iter().enumerate() {
         let term = token.to_lowercase();
         match pt.get_mut(&term) {
             Some(positions) => {
-                positions.push(i as u64);
+                positions.push(i);
             }
             None => {
-                pt.insert(term, vec![i as u64]);
+                pt.insert(term, vec![i]);
             }
         }
     }
